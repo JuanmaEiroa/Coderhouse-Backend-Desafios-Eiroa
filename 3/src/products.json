@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Xbox 360",
+    "description": "Consola Xbox 360 de Microsoft. Color negro. Capacidad de disco de 512 GB. Con 1 control wireless incluído",
+    "price": 100000,
+    "thumbnail": "Sin imagen",
+    "code": "XB360",
+    "stock": 15,
+    "id": 1
+  },
+  {
+    "title": "Xbox One",
+    "description": "Consola Xbox One de Microsoft. Color blanco. Capacidad de almacenamiento de 1 TB. Con 1 control wireless incluido.",
+    "price": 175000,
+    "thumbnail": "Sin imagen",
+    "code": "XB1",
+    "stock": 40,
+    "id": 2
+  },
+  {
+    "title": "Xbox Series S",
+    "description": "Consola Xbox Series S de Microsoft. Color negro. Capacidad de almacenamiento de 1 TB. Con 1 control wireless incluído",
+    "price": 255000,
+    "thumbnail": "Sin imagen",
+    "code": "XBSERS",
+    "stock": 20,
+    "id": 3
+  },
+  {
+    "title": "Xbox Series X",
+    "description": "Consola Xbox Series X de Microsoft. Color blanco. Capacidad de almacenamiento de 1 TB. Con 1 control wireless incluído",
+    "price": 275000,
+    "thumbnail": "Sin imagen",
+    "code": "XBSERX",
+    "stock": 20,
+    "id": 4
+  },
+  {
+    "title": "PlayStation 3",
+    "description": "Consola Playstation 3 de Sony. Color negro. Capacidad de almacenamiento de 512 GB. Con 1 control wireless incluído",
+    "price": 120000,
+    "thumbnail": "Sin imagen",
+    "code": "PS3",
+    "stock": 25,
+    "id": 5
+  },
+  {
+    "title": "PlayStation 4",
+    "description": "Consola Playstation 4 de Sony. Color negro. Capacidad de almacenamiento de 1 TB. Con 1 control wireless incluído",
+    "price": 180000,
+    "thumbnail": "Sin imagen",
+    "code": "PS4",
+    "stock": 50,
+    "id": 6
+  },
+  {
+    "title": "PlayStation 5",
+    "description": "Consola Playstation 5 de Sony. Color blanco. Capacidad de almacenamiento de 1 TB. Con 1 control wireless incluído",
+    "price": 300000,
+    "thumbnail": "Sin imagen",
+    "code": "PS5",
+    "stock": 10,
+    "id": 7
+  },
+  {
+    "title": "Nintendo Wii",
+    "description": "Consola Wii de Nintendo. Color blanco. Capacidad de almacenamiento de 512 GB. Incluye sensor de movimiento y 2 controles.",
+    "price": 100000,
+    "thumbnail": "Sin imagen",
+    "code": "WII",
+    "stock": 25,
+    "id": 8
+  },
+  {
+    "title": "Nintendo WiiU",
+    "description": "Consola WiiU de Nintendo. Color blanco. Capacidad de almacenamiento de 1 TB. Incluye sensor de movimiento y 2 controles",
+    "price": 150000,
+    "thumbnail": "Sin imagen",
+    "code": "WIIU",
+    "stock": 35,
+    "id": 9
+  },
+  {
+    "title": "Nintendo Switch",
+    "description": "Consola Switch de Nintendo. Color blanco. Capacidad de almacenamiento de 1 TB. Incluye consola portátil, estuche portátil y 2 controles",
+    "price": 200000,
+    "thumbnail": "Sin imagen",
+    "code": "SWI",
+    "stock": 30,
+    "id": 10
+  }
+]
