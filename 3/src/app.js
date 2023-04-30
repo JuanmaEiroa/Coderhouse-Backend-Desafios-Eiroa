@@ -13,20 +13,31 @@ app.listen(8080, () => {
   console.log("Listening in 8080"); //Check de que el servidor se encuentra funcionando en el puerto 8080.
 });
 
-app.get("/products", async (req, res) => {
-  res.send(await productManager.getProducts()); //Endpoint para obtener la lista de productos completa, sin querys.
-});
-
-/*app.get("/products", async (req, res) => {
-    res.send(productManager.getProducts)        //Endpoint para obtener la lista de productos con un límite de cantidad, establecido en el query param.
-})
-*/
-
-app.get("/products/:id", async (req, res) => {
-  try {
-    console.log(await productManager.getProductById(parseInt(req.params.id)));
-    res.send(await productManager.getProductById(parseInt(req.params.id)));
-  } catch (err) {
-    res.status(400).send({ err });
+app.get("/products", async (req, res) => {  //Endpoint para mostrar productos
+  let productList = await productManager.getProducts();     //Se obtiene el array de productos.
+  let productLimit = req.query.limit;       //Se obtiene el límite de productos (en caso de haber sido definido) a mostrar.
+  if (productLimit) {
+    res.send(await productList.slice(0, productLimit)); //En caso de definir un límite de productos como req.query, se mostrarán esa cantidad
+  } else {
+    res.send(productList);          // En caso de que no se defina un req.query, se mostrarán todos los productos de la lista. 
   }
 });
+
+app.get("/products/:id", async (req, res) => {
+  //Endpoint para obtener un producto según un id, indicándolo como req.param
+  try {
+    let productFound = await productManager.getProductById(
+      parseInt(req.params.id)
+    );
+    if (productFound != undefined) {
+      res.send(productFound); //Si el id existe, se muestra el producto que se buscaba
+    } else {
+      res.status(400).send(`No existe ese ID`); //Si el id no existe, se muestra un error
+    }
+  } catch (err) {
+    res.status(400).send(`Hubo un error al buscar por ID: ${err}`);
+  }
+});
+
+
+//Code by Juan Manuel Eiroa :)

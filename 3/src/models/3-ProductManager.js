@@ -73,8 +73,9 @@ export default class ProductManager {
       let productList = JSON.parse(
         await fs.promises.readFile(this.path, "utf-8")
       );
-      await productList.find((prod) => {
-        return prod.id === id;
+
+      return productList.find((prod) => {
+       return prod.id === id;
       });
     } catch (err) {
       console.log(`Error al obtener el producto por ID: ${err}`);
@@ -111,49 +112,6 @@ export default class ProductManager {
   }
 }
 
-//TEST de DESAFIO ANTERIOR
-/*
-const products = new ProductManager("./products.json"); //Check 1 - Creación de instancia de ProductManager
-
-async function test() {
-  try {
-    await products.getProducts() //Check 2 - Obtención de arreglo vacío previo al agregado de productos
-
-    await products.addProduct(
-      "Producto 1",
-      "Este es el producto 1",
-      2500,
-      "Sin imagen",
-      "ABC123",
-      20
-    );
-    await products.addProduct(
-      "Producto 2",
-      "Este es el producto 2",
-      1200,
-      "Sin imagen",
-      "ABC124",
-      20
-    ); //Check 3 y 4 - Agregado de 2 productos con ID autoincrementable.
-
-    await products.getProducts(); //Check 5 - Obtención de productos agregados previamente
-
-    await products.getProductById(1); //Check 6 - Obtención de producto por ID
-
-    await products.updateProduct(1, "title", "Este es el nuevo producto 1");
-    await products.getProductById(1); //Check 7 - Actualización de un campo del producto 1, y obtención del mismo mediante ID
-
-
-    await products.deleteProduct(1);
-    await products.deleteProduct(2);
-    await products.getProducts(); //Check 8 - Eliminación de productos a elección por ID y obtención de nueva lista de productos (al eliminar ambos, se obtiene nuevamente un array vacío)
-  } catch (err) {
-    console.log(`Se ha producido un error en el test: ${err}`);
-  }
-}
-
-test();
 
 //Code by Juan Manuel Eiroa :)
 
-*/
