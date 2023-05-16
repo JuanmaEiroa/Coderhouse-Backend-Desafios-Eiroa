@@ -34,7 +34,6 @@ productsRouter.post("/", async (req, res) => {
   try {
     const product = req.body;
     res.status(201).send(await productManager.addProduct(product)); //Método para agregar un producto a la lista, utilizando lo escrito en el body del request.
-
   } catch (err) {
     res.status(400).send(`Hubo un error al agregar el producto: ${err}`);
   }
