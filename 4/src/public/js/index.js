@@ -1,10 +1,9 @@
 const socket = io();
 
 function render(data) {
-  const productList = document.getElementById("productList");
-
-  const newList = data.map((prod) => {
-    return `<li class="productTitle">${prod.title} 
+  const html = data
+    .map((prod, index) => {
+      return `<li class="productTitle">${prod.title} 
           <ul class="productDesc">
             <li>Descripción: ${prod.description}</li>
             <li>Precio: ${prod.price}</li>
@@ -14,14 +13,15 @@ function render(data) {
           </ul>
       </li>
           `;
-  });
-  productList.innerHTML = newList;
+    })
+    .join(" ");
+  console.log(html);
+  document.getElementById("productList").innerHTML = html;
 }
 
-socket.on("productList", (data) =>{
-  console.log(data);
+socket.on("productList", (data) => {
   render(data);
-})
+});
 
 socket.on("updatedProducts", (data) => {
   render(data);

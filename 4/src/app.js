@@ -12,7 +12,6 @@ import ProductManager from "./models/ProductManager.js";
 const app = express();
 
 const productManager = new ProductManager("./products.json");
-const productList = productManager.getProducts();
 
 //Uso de middleware para parsear los datos de la petición.
 app.use(express.json());
@@ -35,10 +34,9 @@ const httpServer = app.listen(8080, () => {
 });
 const io = new Server(httpServer);
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("Nuevo cliente conectado!");
-  console.log(productList);
-  socket.emit("productList", productList);
+  socket.emit("productList", await productManager.getProducts());
 });
 
 //RECIBIR QUE SE ACTUALIZA LA LISTA DE PRODUCTOS Y ENVIARLA NUEVAMENTE AL USUARIO
