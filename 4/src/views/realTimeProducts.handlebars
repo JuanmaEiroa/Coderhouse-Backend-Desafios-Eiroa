@@ -1,5 +1,29 @@
 <h1 class="productListTitle">Listado de Productos</h1>
 
+<fieldset><legend><h4>Agregar nuevo producto</h4></legend>
+<form>
+    <label for="prodTitle">Nombre del producto: </label><input type="text" id="prodTitle" name="prodTitle" />
+    <br />
+    <label for="prodDesc">Descripción del producto: </label><textarea id="prodDesc" name="prodDesc" /></textarea>
+    <br />
+    <label for="prodPrice">Precio del producto: </label><input type="text" id="prodPrice" name="prodPrice" />
+    <br />
+    <label for="prodStock">Stock del producto: </label><input type="text" id="prodStock" name="prodStock" />
+    <br />
+    <label for="prodCode">Código del producto: </label><input type="text" id="prodCode" name="prodCode" />
+    <br />
+    <label for="prodCategory">Categoría del producto: </label><input type="text" id="prodCategory" name="prodCategory" />
+    <br />
+    <button onclick="uploadProduct()">Cargar producto</button>
+</form>
+</fieldset>
+
+<fieldset><legend><h4>Agregar nuevo producto</h4></legend>
+    <label for="deletedProdId">Id del producto a eliminar: </label><input type="text" id="deletedProdId" name="deletedProdId" />
+    <br/>
+    <button onclick="eraseProduct()">Eliminar producto</button>
+</fieldset>
+
 <h4>Los productos agregados hasta el momento son:</h4>
 
 <div class="productListContainer">
@@ -7,6 +31,8 @@
         
     </ul>
 </div>
+
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

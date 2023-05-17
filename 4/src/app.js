@@ -37,8 +37,16 @@ const io = new Server(httpServer);
 io.on("connection", async (socket) => {
   console.log("Nuevo cliente conectado!");
   socket.emit("productList", await productManager.getProducts());
-});
 
-//RECIBIR QUE SE ACTUALIZA LA LISTA DE PRODUCTOS Y ENVIARLA NUEVAMENTE AL USUARIO
+  socket.on("newProduct", async (product) => {
+    await productManager.addProduct(product);
+    socket.emit("productList", await productManager.getProducts());
+  });
+
+  socket.on("eraseProduct", async(id) => {
+    await productManager.deleteProduct(id);
+    socket.emit("productList", await productManager.getProducts());
+  })
+});
 
 //Code by Juan Manuel Eiroa :)
