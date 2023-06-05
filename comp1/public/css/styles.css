@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.tableContainer {
+  margin: auto;
+  width: 80%;
+}
+
+td {
+    padding-inline: 10px;
+}
+

@@ -3,8 +3,11 @@ import handlebars from "express-handlebars";
 import mongoose from "mongoose";
 import productRouter from "./routers/products.router.js";
 import cartRouter from "./routers/carts.router.js";
-
-const app = express();
+import messageRouter from "./routers/messages.router.js";
+import viewsRouter from "./routers/views.router.js";
+import * as path from 'path';
+import {__dirname, app, io} from "./utils.js";
+import messageManager from "./dao/managers/message.manager.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,7 +16,7 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", "views/");
 app.set("view engine", "handlebars");
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname + "/public")));
 
 mongoose.connect(
   "mongodb+srv://juanmaeiroa:cel1540236483@codercluster.ictc3lo.mongodb.net/?retryWrites=true&w=majority",
@@ -22,7 +25,18 @@ mongoose.connect(
 
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
+app.use("/api/messages", messageRouter);
+app.use("/", viewsRouter);
 
-app.listen(8080, () => {
-  console.log("Listening on port 8080");
+/*
+io.on("connection", (socket) => {
+  socket.on("message", async (data) => {
+    await messageManager.postMessage(data);
+    io.emit("messageLogs", await messageManager.getMessages());
+  });
+
+  socket.on("sayhello", data=>{
+    socket.broadcast.emit("alert", data)
+  })
 });
+*/

@@ -1,0 +1,23 @@
+<h2>Los productos disponibles son:</h2>
+<div class="tableContainer" style="width:80%; margin: auto;">
+  <table class="productTable" style="border: 2px black solid; text-align: center;">
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Código</th>
+    <th>Precio</th>
+    <th>Stock</th>
+    <th>Categoría</th>
+    {{#each renderProdList}}
+        <tr style="border-bottom: 2px black dashed;">
+            <td>{{this._id}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.code}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.stock}}</td>
+            <td>{{this.category}}</td>
+        </tr>
+    {{/each}}
+  </table>
+</div>

@@ -6,7 +6,7 @@ class MessageManager {
     }
 
     async getMessages(){
-        return await messageModel.find();
+        return await messageModel.find().lean();
     }
 
     async postMessage(message){

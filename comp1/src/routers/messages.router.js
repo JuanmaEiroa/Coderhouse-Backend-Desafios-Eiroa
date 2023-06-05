@@ -13,7 +13,7 @@ messageRouter.get("/", async (req, res) => {
 
 messageRouter.post("/", async (req, res) => {
   try {
-    res.status(201).send(await cartManager.addCart(req.body));
+    res.status(201).send(await messageManager.addMessage(req.body));
   } catch (err) {
     res.status(400).send(err);
   }
@@ -21,10 +21,10 @@ messageRouter.post("/", async (req, res) => {
 
 messageRouter.delete("/:mid", async (req, res) => {
   try {
-    res.status(200).send(await cartManager.deleteMessage(req.params.mid));
+    res.status(200).send(await messageManager.deleteMessage(req.params.mid));
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
-export default cartRouter;
+export default messageRouter;

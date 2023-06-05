@@ -6,7 +6,7 @@ class ProductManager {
     }
 
     async getProducts(){
-        return await productModel.find();
+        return await productModel.find().lean();
     }
 
     async getProductById(pid){

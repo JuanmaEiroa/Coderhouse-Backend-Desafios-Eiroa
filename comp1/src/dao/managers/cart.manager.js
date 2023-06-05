@@ -6,7 +6,7 @@ class CartManager {
     }
 
     async getCarts(){
-        return await cartModel.find();
+        return await cartModel.find().lean();
     }
 
     async getCartById(cid){
@@ -23,6 +23,10 @@ class CartManager {
 
     async deleteCart(cid){
         return await cartModel.deleteOne({_id: cid})
+    }
+
+    async addProdToCart(cid,pid){
+        
     }
 }
 
