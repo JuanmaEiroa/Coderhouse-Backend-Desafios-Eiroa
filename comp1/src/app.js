@@ -7,7 +7,7 @@ import messageRouter from "./routers/messages.router.js";
 import viewsRouter from "./routers/views.router.js";
 import * as path from "path";
 import {app, io } from "./utils.js";
-import messageManager from "./dao/managers/message.manager.js";
+import messageManager from "./dao/dbmanagers/message.manager.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,9 +28,7 @@ app.use("/api/carts", cartRouter);
 app.use("/api/messages", messageRouter);
 app.use("/", viewsRouter);
 
-io.on("connection", (socket) => {
-  console.log("Nuevo usuario conectado");
-
+io.on("connection", async (socket) => {
   socket.on("message", async (data) => {
     await messageManager.postMessage(data);
     io.emit("messageLogs", await messageManager.getMessages());

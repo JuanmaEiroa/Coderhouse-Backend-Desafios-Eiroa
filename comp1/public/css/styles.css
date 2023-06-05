@@ -7,18 +7,38 @@ html {
   padding: 0;
 }
 
+body{
+  background-color: antiquewhite;
+}
+
+h1{
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  text-decoration: underline;
+}
+
 .tableContainer {
   margin: auto;
   width: 80%;
+}
+
+.productTable {
+  border: 2px black solid;
+  text-align: center;
+  background-color: aliceblue;
 }
 
 th {
   border-bottom: solid 1.5px black;
 }
 
+tr {
+  border-bottom: 2px black dashed;
+}
+
 td {
-    padding-inline: 10px;
-    border-bottom: dashed black 1px;
+  padding-inline: 10px;
+  border-bottom: dashed black 1px;
 }
 
 #chatTitle {
@@ -27,7 +47,7 @@ td {
   font-size: 2.5rem;
 }
 
-.chatContainer{
+.chatContainer {
   background-color: rgb(215, 230, 250);
   margin-inline: auto;
   width: 60%;
@@ -37,13 +57,13 @@ td {
   border: dashed 3px gray;
 }
 
-.chatBoxCont{
+.chatBoxCont {
   display: flex;
- padding: 5px;
- justify-content: space-around;
+  padding: 5px;
+  justify-content: space-around;
 }
 
-#chatBox{
+#chatBox {
   width: 90%;
   height: 50px;
   background-color: rgb(190, 240, 253);
