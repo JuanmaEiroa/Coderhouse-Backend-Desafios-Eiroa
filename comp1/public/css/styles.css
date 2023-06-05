@@ -12,7 +12,47 @@ html {
   width: 80%;
 }
 
-td {
-    padding-inline: 10px;
+th {
+  border-bottom: solid 1.5px black;
 }
 
+td {
+    padding-inline: 10px;
+    border-bottom: dashed black 1px;
+}
+
+#chatTitle {
+  text-align: center;
+  font-family: monospace;
+  font-size: 2.5rem;
+}
+
+.chatContainer{
+  background-color: rgb(215, 230, 250);
+  margin-inline: auto;
+  width: 60%;
+}
+
+.messageLogsCont {
+  border: dashed 3px gray;
+}
+
+.chatBoxCont{
+  display: flex;
+ padding: 5px;
+ justify-content: space-around;
+}
+
+#chatBox{
+  width: 90%;
+  height: 50px;
+  background-color: rgb(190, 240, 253);
+}
+
+#sendBtn {
+  width: 100px;
+  background-color: lightblue;
+  font-size: 1.2em;
+  font-family: "Calibri", sans-serif;
+  font-weight: 800;
+}

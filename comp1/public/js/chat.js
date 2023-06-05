@@ -1,10 +1,9 @@
 const socket = io();
 
-console.log("CHAT.JS cargado correctamente");
-
 let user;
 let chatBox = document.getElementById("chatBox");
-let userIdentified;
+let sendBtn = document.getElementById("sendBtn");
+let userIdentified = false;
 
 Swal.fire({
   title: "Identificación",
@@ -17,14 +16,22 @@ Swal.fire({
 }).then((result) => {
   user = result.value;
   socket.emit("sayhello", user);
+  userIdentified = true;
 });
 
 chatBox.addEventListener("keyup", (evt) => {
   if (evt.key === "Enter") {
     if (chatBox.value.trim().length > 0) {
-      socket.emit("message", { user: user, message: chatBox.value, userIdentified });
+      socket.emit("message", { user: user, message: chatBox.value });
       chatBox.value = "";
     }
+  }
+});
+
+sendBtn.addEventListener("click", (evt) => {
+  if (chatBox.value.trim().length > 0) {
+    socket.emit("message", { user: user, message: chatBox.value });
+    chatBox.value = "";
   }
 });
 
