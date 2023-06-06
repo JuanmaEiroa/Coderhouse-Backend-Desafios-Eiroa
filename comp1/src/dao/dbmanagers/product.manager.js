@@ -10,7 +10,7 @@ class ProductManager {
     }
 
     async getProductById(pid){
-        return await productModel.find({_id:pid})
+        return await productModel.find({_id:pid}).lean();
     }
 
     async addProduct(product){

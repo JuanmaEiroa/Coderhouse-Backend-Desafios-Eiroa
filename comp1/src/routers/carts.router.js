@@ -45,7 +45,7 @@ cartRouter.delete("/:pid", async (req, res) => {
   }
 });
 
-cartRouter.post(":cid/product/:pid", async (req,res) => {
+cartRouter.post("/:cid/product/:pid", async (req,res) => {
   try {
     res.status(201).send(await cartManager.addProdToCart(req.params.cid, req.params.pid))
   } catch (err) {
