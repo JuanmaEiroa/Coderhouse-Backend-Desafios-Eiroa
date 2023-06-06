@@ -11,7 +11,7 @@ class CartManager {
   }
 
   async getCartById(cid) {
-    return await cartModel.find({ _id: cid });
+    return await cartModel.findById(cid);
   }
 
   async addCart(cart) {
@@ -19,12 +19,17 @@ class CartManager {
   }
 
   async updateCart(cid, cart) {
-    return await cartModel.updateOne({ _id: cid }, { cart });
+    return await cartModel.findByIdAndUpdate(
+      cid,
+      { $set: cart },
+      { new: true }
+    );
   }
 
   async deleteCart(cid) {
-    return await cartModel.deleteOne({ _id: cid });
+    return await cartModel.findByIdAndDelete(cid);
   }
+
   async addProdtoCart(cid, pid) {
     try {
       //Se trae la lista de carritos y se busca el que corresponde según el id
@@ -33,28 +38,20 @@ class CartManager {
       //Se trae la lista de productos y se busca el que corresponde según el id
       let selectedProduct = await productManager.getProductById(pid);
 
-      //Definición de variables para producto ya existente
-      let prodFound = false;
-      let oldProd;
-
-      //Uso de método forEach para verificar la existencia de un producto, cambiando la variable a true si se encontró y seleccionando ese producto para actualizarlo luego.
-      selectedCart[0].products.forEach((prod) => {
-        if (prod.id === selectedProduct.id) {
-          prodFound = true;
-          oldProd = prod;
-        }
+      let existingProduct = selectedCart.products.find((prod) => {
+        return prod.product.toString() === selectedProduct._id.toString();
       });
 
-      //Uso de condicional para determinar si existe o no el producto en el carrito seleccionado
-      if (prodFound) {
-        oldProd.quantity++; //Si el producto existe, se aumenta su cantidad en 1
+      if (existingProduct) {
+        existingProduct.quantity++;
       } else {
-        selectedCart[0].products.push({
+        selectedCart.products.push({
           product: selectedProduct._id,
           quantity: 1,
-        }); //Si el producto no existe, se ingresa en el carrito con cantidad de 1.
+        });
       }
-      this.updateCart(cid, selectedCart[0]);
+
+      await this.updateCart(cid, selectedCart);
     } catch (err) {
       console.log(`Error al agregar el producto al carrito por ID: ${err}`);
     }

@@ -14,7 +14,7 @@ class MessageManager {
     }
 
     async deleteMessage(mid){
-        return await messageModel.deleteOne({_id: mid})
+        return await messageModel.findByIdAndDelete(mid)
     }
 }
 
