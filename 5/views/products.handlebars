@@ -1,3 +1,17 @@
+<nav id="navbar">
+  <p>Bienvenido,
+    {{user.first_name}}
+    {{user.last_name}}
+    <br />
+    {{user.email}}
+    <br />
+    Rol:
+    {{user.role}}
+  </p>
+  <form action="/api/users/logout" method="post">
+    <button type="submit">Cerrar sesión</button>
+  </form>
+</nav>
 <h1>Listado de Productos</h1>
 <h2>Los productos disponibles son:</h2>
 <div class="tableContainer">
