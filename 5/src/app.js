@@ -5,11 +5,13 @@ import MongoStore from "connect-mongo";
 import productRouter from "./routers/products.router.js";
 import cartRouter from "./routers/carts.router.js";
 import messageRouter from "./routers/messages.router.js";
+import userRouter from "./routers/users.router.js";
 import viewsRouter from "./routers/views.router.js";
 import * as path from "path";
 import { app, io } from "./utils.js";
 import messageManager from "./dao/dbmanagers/message.manager.js";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
