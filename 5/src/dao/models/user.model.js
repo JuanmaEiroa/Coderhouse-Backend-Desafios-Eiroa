@@ -24,10 +24,6 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   img: String,
-  role: {
-    type: String,
-    default: "user",
-  },
 });
 
 const userModel = mongoose.model("users", userSchema);

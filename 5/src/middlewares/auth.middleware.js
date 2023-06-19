@@ -13,3 +13,12 @@ export function isGuest(req, res, next) {
     res.redirect("/products");
   }
 }
+
+export function isAdmin(req, res, next) {
+  if (req.session.user.email === "adminCoder@coder.com") {
+    req.session.isAdmin = true;
+  } else {
+    req.session.isAdmin = false;
+  }
+  next();
+}

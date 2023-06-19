@@ -2,7 +2,7 @@ import { Router } from "express";
 import productManager from "../dao/dbmanagers/product.manager.js";
 import messageManager from "../dao/dbmanagers/message.manager.js";
 import cartManager from "../dao/dbmanagers/cart.manager.js";
-import { isAuth, isGuest } from "../middlewares/auth.middleware.js";
+import { isAdmin, isAuth, isGuest } from "../middlewares/auth.middleware.js";
 
 const viewsRouter = Router();
 
@@ -12,10 +12,10 @@ viewsRouter.get("/", isGuest, (req, res) => {
   });
 });
 
-viewsRouter.get("/products", isAuth, async (req, res) => {
+viewsRouter.get("/products", [isAuth, isAdmin], async (req, res) => {
   const { user } = req.session;
   delete user.password;
-
+  const role = req.session.isAdmin ? "admin" : "user";
   const { limit, page, category, availability, sort } = req.query;
   const prodList = await productManager.getProducts(
     limit,
@@ -34,11 +34,11 @@ viewsRouter.get("/products", isAuth, async (req, res) => {
   prodList.nextLink = prodList.hasNextPage
     ? `products?page=${prodList.nextPage}`
     : "";
-  res.render("products", {
-    title: "Listado de Productos",
-    prodList,
-    user: user,
-  });
+    res.render("products", {
+      title: "Listado de Productos",
+      prodList,
+      user: { ...user, role },
+    });
 });
 
 viewsRouter.get("/carts/:cid", async (req, res) => {
