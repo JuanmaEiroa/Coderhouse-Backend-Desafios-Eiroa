@@ -1,17 +1,17 @@
 * {
   box-sizing: border-box;
+  margin:0;
 }
 
 html {
-  margin: 0;
   padding: 0;
 }
 
-body{
+body {
   background-color: antiquewhite;
 }
 
-h1{
+h1 {
   text-align: center;
   font-family: Verdana, sans-serif;
   text-decoration: underline;
@@ -75,4 +75,69 @@ td {
   font-size: 1.2em;
   font-family: "Calibri", sans-serif;
   font-weight: 800;
+}
+
+#loginForm {
+  text-align: center;
+  border: 3px dotted gray;
+  width: 250px;
+  margin: auto;
+  height: 250px;
+  padding-top: 25px;
+}
+
+.formInput {
+  background-color: blanchedalmond;
+  height: 40px;
+}
+
+.formInput:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.formBtn {
+  background-color: chocolate;
+  border-radius: 15%;
+  box-sizing: 200px 200px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+#registerForm {
+  text-align: center;
+  border: 3px dotted gray;
+  width: 500px;
+  margin: auto;
+  height: 420px;
+  padding-top: 25px;
+}
+
+#registerForm input {
+  width: 400px;
+}
+
+#navbar {
+  background-color: #178582;
+  color: whitesmoke;
+  text-align: right;
+  padding-right: 20px;
+  height: 120px;
+  margin-bottom: 10px;
+  border-bottom: 5px solid #183b3a;
+}
+
+#navbar p {
+  margin:0;
+}
+
+#navbar button {
+  background-color: red;
+  color: whitesmoke;
+  border: none;
+  height: 1.5em;
+  box-shadow: 1px 3px 3px black;
+}
+
+#navbar button:hover {
+  cursor: pointer;
 }
