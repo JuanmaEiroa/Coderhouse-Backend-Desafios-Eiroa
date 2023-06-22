@@ -13,15 +13,27 @@ userRouter.post("/", async (req, res) => {
   }
 });
 
+let userRole;
+
 userRouter.post("/auth", async (req, res) => {
+  userRole = "User";
   const { email, password } = req.body;
   try {
-    const user = await userManager.getByEmail(email);
-    if (!user)
-      throw new Error("El email no se encuentra en el sistema. Registrese");
-    if (user.password !== password)
-      throw new Error("La contraseña no es correcta");
-    req.session.user = user;
+    if (email === "adminCoder@coder.com" && password === "coderpass123") {
+      userRole = "Admin";
+      req.session.user = {
+        first_name: "Coder",
+        last_name: "House",
+        email: email,
+      }
+    } else {
+      const user = await userManager.getByEmail(email);
+      if (!user)
+        throw new Error("El email no se encuentra en el sistema. Registrese");
+      if (user.password !== password)
+        throw new Error("La contraseña no es correcta");
+      req.session.user = user;
+    }
     res.status(201).redirect("/products");
   } catch (err) {
     res.status(400).send(`Error al iniciar sesión: ${err}`);
@@ -33,4 +45,4 @@ userRouter.post("/logout", (req, res) => {
   res.status(201).redirect("/");
 });
 
-export default userRouter;
+export {userRole, userRouter};
