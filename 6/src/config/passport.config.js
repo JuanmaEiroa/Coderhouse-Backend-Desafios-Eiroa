@@ -1,6 +1,7 @@
 //Archivo de configuración de Passport para autenticación y autorización
 import passport from "passport";
 import local from "passport-local";
+import GitHubStrategy from "passport-github2";
 import userManager from "../dao/dbmanagers/user.manager.js";
 import { encryptPassword, comparePassword } from "../utils/encrypt.util.js";
 
@@ -18,7 +19,6 @@ const initializePassport = () => {
             console.log("El usuario ya existe");
             return done(null, false);
           }
-
           const encryptedPass = await encryptPassword(password);
           const newUser = await userManager.createUser({
             first_name,
@@ -55,6 +55,38 @@ const initializePassport = () => {
           return done(null, user);
         } catch (err) {
           return done("Error de servidor para el login: " + err);
+        }
+      }
+    )
+  );
+
+  passport.use(
+    "github",
+    new GitHubStrategy(
+      {
+        clientID: "Iv1.c3b29227abcc3cc5",
+        clientSecret: "0da4fa924aaaa30affb8756029ad92e6a75ed86e",
+        callbackURL: "http://localhost:8080/api/users/githubcallback",
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          let user = await userManager.getByEmail(profile._json.email);
+          if (!user) {
+            let newUser = {
+              first_name: profile._json.name,
+              last_name: "",
+              email: profile._json.email,
+              password: "",
+              age: undefined,
+              img: profile._json.avatar_url,
+            };
+            user = await userManager.createUser(newUser);
+            done(null, user);
+          } else {
+            done(null, user);
+          }
+        } catch (err) {
+          done(err, false);
         }
       }
     )

@@ -81,8 +81,8 @@ td {
   text-align: center;
   border: 3px dotted gray;
   width: 250px;
-  margin: auto;
-  height: 250px;
+  margin: 50px auto;
+  height: 300px;
   padding-top: 25px;
 }
 
@@ -97,6 +97,23 @@ td {
 
 .formBtn {
   background-color: chocolate;
+  border-radius: 15%;
+  box-sizing: 200px 200px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.divider {
+  width: 80%;
+  margin: 10px auto 0;
+  height: 3px;
+  background-color: gray;
+  border: none;
+}
+
+.githubBtn {
+  background-color: #333;
+  color: white;
   border-radius: 15%;
   box-sizing: 200px 200px;
   height: 30px;

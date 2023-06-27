@@ -31,6 +31,21 @@ userRouter.post(
   }
 );
 
+userRouter.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] }),
+  async (req, res) => {}
+);
+
+userRouter.get(
+  "/githubcallback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  async (req, res) => {
+    req.session.user = req.user;
+    res.redirect("/");
+  }
+);
+
 userRouter.get("/loginerror", (req,res)=>{
   res.send({error: "Fallo en el inicio de sesión"})
 })
