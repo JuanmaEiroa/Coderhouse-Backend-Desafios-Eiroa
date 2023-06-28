@@ -1,4 +1,3 @@
-//Archivo de configuración de Passport para autenticación y autorización
 import passport from "passport";
 import local from "passport-local";
 import GitHubStrategy from "passport-github2";
@@ -15,7 +14,7 @@ const initializePassport = () => {
         const { first_name, last_name, email, age, img } = req.body;
         try {
           let user = await userManager.getByEmail(username);
-          if (user) {
+          if (user || username === "adminCoder@coder.com") {
             console.log("El usuario ya existe");
             return done(null, false);
           }
@@ -31,7 +30,7 @@ const initializePassport = () => {
 
           return done(null, newUser);
         } catch (err) {
-          return done("Error al generar el usuario: " + err);
+          return done(`Error al registrar el usuario: ${err}`, false);
         }
       }
     )
@@ -43,22 +42,64 @@ const initializePassport = () => {
       { usernameField: "email" },
       async (username, password, done) => {
         try {
-          const user = await userManager.getByEmail(username);
-          if (!user) {
-            console.log("El usuario no existe. Regístrese");
+          if (username === "adminCoder@coder.com") {
             return done(null, false);
+          } else {
+            const user = await userManager.getByEmail(username);
+            if (!user) {
+              console.log("El usuario no existe. Regístrese");
+              return done(null, false);
+            }
+            if (!comparePassword(user, password)) {
+              console.log("La contraseña no es correcta. Intente nuevamente");
+              return done(null, false);
+            }
+            return done(null, user);
           }
-          if (!comparePassword(user, password)) {
-            console.log("La contraseña no es correcta. Intente nuevamente");
-            return done(null, false);
-          }
-          return done(null, user);
         } catch (err) {
-          return done("Error de servidor para el login: " + err);
+          console.log(`Error de servidor para el login: ${err}`);
         }
       }
     )
   );
+
+
+  //PRUEBAS PARA LOGIN COMO ADMIN Y ASIGNACION DE ROLES
+  /*
+  passport.use(
+    "login",
+    new LocalStrategy(
+      { passReqToCallback: true, usernameField: "email" },
+      async (req, username, password, done) => {
+        try {
+          if (username === "adminCoder@coder.com" && password === "adminCod3r123") {
+            req.session.role = "Admin";
+            const user = {
+              first_name: "Coder",
+              last_name: "House",
+              email: username
+            }
+            return done(null, user);
+          } else {
+            const user = await userManager.getByEmail(username);
+            if (!user) {
+              console.log("El usuario no existe. Regístrese");
+              return done(null, false);
+            }
+            if (!comparePassword(user, password)) {
+              console.log("La contraseña no es correcta. Intente nuevamente");
+              return done(null, false);
+            }
+            req.session.role = "User";
+            return done(null, user);
+          }
+        } catch (err) {
+          console.log(`Error de servidor para el login: ${err}`);
+        }
+      }
+    )
+  );
+  */
 
   passport.use(
     "github",
@@ -96,18 +137,11 @@ const initializePassport = () => {
     done(null, user._id);
   });
 
-  passport.deserializeUser(async (id, done) => {
+   passport.deserializeUser(async (id, done) => {
     let user = await userManager.getById(id);
-    if (
-      user.email === "adminCoder@coder.com" &&
-      user.password === "adminCod3r123"
-    ) {
-      user.role = "Admin";
-    } else {
-      user.role = "User";
-    }
     done(null, user);
   });
+  
 };
 
 export default initializePassport;
