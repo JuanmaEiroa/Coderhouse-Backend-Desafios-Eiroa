@@ -136,6 +136,7 @@ const initializePassport = () => {
   //Estrategia de Passport para jwt por cookies
   const jwtStrategy = jwt.Strategy;
   const jwtExtract = jwt.ExtractJwt;
+  
   const cookieExtractor = (req) => {
     let token = null;
     if (req && req.cookies) {
@@ -143,6 +144,7 @@ const initializePassport = () => {
     }
     return token;
   };
+
   passport.use(
     "current",
     new jwtStrategy(
@@ -158,7 +160,7 @@ const initializePassport = () => {
       try {
         return done(null, jwt_payload);
       } catch (err) {
-        done(err);
+        return done(err);
       }
     }
   );

@@ -1,5 +1,6 @@
 import { Router } from "express";
-import passport from "passport"; 
+import passport from "passport";
+import { passportCall } from "../middlewares/jwt.middleware.js";
 
 const userRouter = Router();
 
@@ -31,6 +32,12 @@ userRouter.post(
   }
 );
 
+//Uso de estrategia con jwt por cookies
+userRouter.post("/current", passportCall, async (req, res) => {
+  const user = req.user;
+  res.send({ user });
+});
+
 userRouter.get(
   "/github",
   passport.authenticate("github", { scope: ["user:email"] }),
@@ -46,9 +53,9 @@ userRouter.get(
   }
 );
 
-userRouter.get("/loginerror", (req,res)=>{
-  res.send({error: "Fallo en el inicio de sesión"})
-})
+userRouter.get("/loginerror", (req, res) => {
+  res.send({ error: "Fallo en el inicio de sesión" });
+});
 
 userRouter.post("/logout", (req, res) => {
   req.session.destroy();
