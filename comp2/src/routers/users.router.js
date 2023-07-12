@@ -1,6 +1,10 @@
 import { Router } from "express";
 import passport from "passport";
-import { passportCall } from "../middlewares/jwt.middleware.js";
+import {
+  generateToken,
+  authToken,
+  passportCall,
+} from "../middlewares/jwt.middleware.js";
 
 const userRouter = Router();
 
@@ -26,16 +30,19 @@ userRouter.post(
         .send({ status: "error", error: "Credenciales inválidas" });
     }
     const user = req.user;
-    delete user.password;
-    req.session.user = user;
-    res.redirect("/");
+    const token = generateToken({ user });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        maxAge: 60000,
+      })
+      .redirect("/");
   }
 );
 
 //Uso de estrategia con jwt por cookies
-userRouter.post("/current", passportCall, async (req, res) => {
-  const user = req.user;
-  res.send({ user });
+userRouter.get("/current", authToken, passportCall, async (req, res) => {
+  res.status(200).send({ message: "Usuario actual", user: req.user });
 });
 
 userRouter.get(
