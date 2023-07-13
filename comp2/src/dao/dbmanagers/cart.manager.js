@@ -25,6 +25,7 @@ class CartManager {
       { new: true }
     );
   }
+  
 
   async addProdtoCart(cid, pid) {
     try {
