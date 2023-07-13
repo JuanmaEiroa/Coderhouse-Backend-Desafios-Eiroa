@@ -1,10 +1,5 @@
 import { Router } from "express";
-import passport from "passport";
-import {
-  generateToken,
-  authToken,
-  passportCall,
-} from "../middlewares/jwt.middleware.js";
+import passport from "passport"; 
 
 const userRouter = Router();
 
@@ -30,20 +25,11 @@ userRouter.post(
         .send({ status: "error", error: "Credenciales inválidas" });
     }
     const user = req.user;
-    const token = generateToken({ user });
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        maxAge: 60000,
-      })
-      .redirect("/");
+    delete user.password;
+    req.session.user = user;
+    res.redirect("/");
   }
 );
-
-//Uso de estrategia con jwt por cookies
-userRouter.get("/current", authToken, passportCall, async (req, res) => {
-  res.status(200).send({ message: "Usuario actual", user: req.user });
-});
 
 userRouter.get(
   "/github",
@@ -60,9 +46,9 @@ userRouter.get(
   }
 );
 
-userRouter.get("/loginerror", (req, res) => {
-  res.send({ error: "Fallo en el inicio de sesión" });
-});
+userRouter.get("/loginerror", (req,res)=>{
+  res.send({error: "Fallo en el inicio de sesión"})
+})
 
 userRouter.post("/logout", (req, res) => {
   req.session.destroy();

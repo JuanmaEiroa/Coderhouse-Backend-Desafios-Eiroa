@@ -11,7 +11,7 @@ class CartManager {
   }
 
   async getCartById(cid) {
-    return await cartModel.findById(cid).populate("products.product").lean();
+    return await cartModel.findById(cid).populate("products.product", "-__v").lean();
   }
 
   async addCart(cart) {
@@ -52,8 +52,9 @@ class CartManager {
       console.log(`Error al agregar el producto al carrito por ID: ${err}`);
     }
   }
+  
 
-  async deleteProdfromCart(cid, pid) {
+    async deleteProdfromCart(cid, pid) {
     try {
       await cartModel.updateOne(
         { _id: cid },
@@ -66,10 +67,7 @@ class CartManager {
 
   async deleteAllProds(cid) {
     try {
-      await cartModel.updateOne(
-        { _id: cid },
-        { $set: { products: [] } }
-      );
+      await cartModel.updateOne({ _id: cid }, { $set: { products: [] } });
     } catch (err) {
       console.log(`Error al borrar los productos del carrito: ${err}`);
     }
@@ -82,7 +80,9 @@ class CartManager {
         { $set: { "products.$.quantity": quantity.quantity } }
       );
     } catch (err) {
-      console.log(`Error actualizando la cantidad del producto del carrito: ${err}`);
+      console.log(
+        `Error actualizando la cantidad del producto del carrito: ${err}`
+      );
     }
   }
 }

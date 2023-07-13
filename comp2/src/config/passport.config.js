@@ -1,9 +1,9 @@
 import passport from "passport";
 import local from "passport-local";
 import GitHubStrategy from "passport-github2";
-import jwt from "passport-jwt";
 import userManager from "../dao/dbmanagers/user.manager.js";
 import { encryptPassword, comparePassword } from "../utils/encrypt.util.js";
+import cartManager from "../dao/dbmanagers/cart.manager.js";
 
 const LocalStrategy = local.Strategy;
 const initializePassport = () => {
@@ -28,6 +28,9 @@ const initializePassport = () => {
             password: encryptedPass,
             img,
           });
+          const userCart = await cartManager.addCart();
+          newUser.cart = userCart._id;
+          await newUser.save();
 
           return done(null, newUser);
         } catch (err) {
@@ -40,8 +43,8 @@ const initializePassport = () => {
   passport.use(
     "login",
     new LocalStrategy(
-      { usernameField: "email" },
-      async (username, password, done) => {
+      {passReqToCallback: true, usernameField: "email" },
+      async (req, username, password, done) => {
         try {
           if (username === "adminCoder@coder.com") {
             return done(null, false);
@@ -131,38 +134,6 @@ const initializePassport = () => {
         }
       }
     )
-  );
-
-  //Estrategia de Passport para jwt por cookies
-  const jwtStrategy = jwt.Strategy;
-  const jwtExtract = jwt.ExtractJwt;
-  
-  const cookieExtractor = (req) => {
-    let token = null;
-    if (req && req.cookies) {
-      token = req.cookies.token;
-    }
-    return token;
-  };
-
-  passport.use(
-    "current",
-    new jwtStrategy(
-      {
-        jwtFromRequest: jwtExtract.fromExtractors([cookieExtractor]),
-        secretOrKey: "coderSecret",
-      },
-      (payload, done) => {
-        done(null, payload);
-      }
-    ),
-    async (jwt_payload, done) => {
-      try {
-        return done(null, jwt_payload);
-      } catch (err) {
-        return done(err);
-      }
-    }
   );
 
   passport.serializeUser((user, done) => {

@@ -8,6 +8,7 @@
     Rol:
     {{user.role}}
   </p>
+  <input type="hidden" id="cartId" value="{{user.cart}}">
   <br />
   <form action="/api/users/logout" method="post">
     <button type="submit">Cerrar sesión</button>

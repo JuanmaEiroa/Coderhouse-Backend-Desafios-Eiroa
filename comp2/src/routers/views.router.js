@@ -2,7 +2,7 @@ import { Router } from "express";
 import productManager from "../dao/dbmanagers/product.manager.js";
 import messageManager from "../dao/dbmanagers/message.manager.js";
 import cartManager from "../dao/dbmanagers/cart.manager.js";
-import { isAuth, isGuest} from "../middlewares/auth.middleware.js";
+import { isAuth, isGuest } from "../middlewares/auth.middleware.js";
 
 const viewsRouter = Router();
 
@@ -33,11 +33,11 @@ viewsRouter.get("/products", isAuth, async (req, res) => {
   prodList.nextLink = prodList.hasNextPage
     ? `products?page=${prodList.nextPage}`
     : "";
-    res.render("products", {
-      title: "Listado de Productos",
-      prodList,
-      user
-    });
+  res.render("products", {
+    title: "Listado de Productos",
+    prodList,
+    user,
+  });
 });
 
 viewsRouter.get("/carts/:cid", async (req, res) => {
@@ -74,6 +74,16 @@ viewsRouter.get("/registererror", (req, res) => {
 viewsRouter.get("/loginerror", (req, res) => {
   res.render("loginerror", {
     title: "Error al iniciar sesión",
+  });
+});
+
+viewsRouter.get("/current", async (req, res) => {
+  const { user } = req.session;
+  const cart = await cartManager.getCartById(user.cart);
+  res.render("current", {
+    title: "Carrito de Compras",
+    user,
+    cart,
   });
 });
 

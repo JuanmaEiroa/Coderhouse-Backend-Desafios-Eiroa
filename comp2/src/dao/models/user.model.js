@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import cartManager from "../dbmanagers/cart.manager.js";
 
 const userSchema = new mongoose.Schema({
   first_name: {
@@ -16,19 +17,18 @@ const userSchema = new mongoose.Schema({
   age: Number,
   img: String,
   cart: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "carts",
-      },
-    ],
-    default: [],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "carts",
   },
   role: {
     type: String,
-    default: "user",
-  },
+    default: "User"
+  }
 });
+
+userSchema.pre("find", function(){
+  this.populate("carts.cart")
+})
 
 const userModel = mongoose.model("users", userSchema);
 

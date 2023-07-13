@@ -35,7 +35,7 @@ app.use(
       mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
       ttl: 6000,
     }),
-    secret: "coderSecret",
+    secret: "pass123",
     resave: true,
     saveUninitialized: true,
   })
