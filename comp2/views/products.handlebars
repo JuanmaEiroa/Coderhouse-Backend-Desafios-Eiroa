@@ -9,7 +9,7 @@
     {{user.role}}
   </p>
   <input type="hidden" id="cartId" value="{{user.cart}}">
-  <br />
+  <a href="/current"><button class="navBtn">Mi Carrito</button></a>
   <form action="/api/users/logout" method="post">
     <button type="submit">Cerrar sesión</button>
   </form>

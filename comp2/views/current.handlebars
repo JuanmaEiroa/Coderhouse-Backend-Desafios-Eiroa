@@ -8,8 +8,8 @@
     Rol:
     {{user.role}}
   </p>
-  <input type="hidden" id="cartId" value="{{user.cart}}">
-  <br />
+  <input type="hidden" id="cartId" value="{{user.cart}}" />
+  <a href="/products"><button class="navBtn">Ver Productos</button></a>
   <form action="/api/users/logout" method="post">
     <button type="submit">Cerrar sesión</button>
   </form>
