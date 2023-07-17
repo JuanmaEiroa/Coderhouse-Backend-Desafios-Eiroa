@@ -61,6 +61,7 @@ class CartManager {
         { _id: cid },
         { $pull: { products: { product: pid } } }
       );
+      return {success: true, message: "Producto eliminado del carrito"}
     } catch (err) {
       console.log(`Error al borrar el producto del carrito por ID: ${err}`);
     }

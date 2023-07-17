@@ -32,6 +32,7 @@
         <td>{{this.product.price}}</td>
         <td>{{this.quantity}}</td>
         <td>{{this.product.category}}</td>
+        <td><button onclick="deleteFromCart('{{this.product._id}}')">Eliminar producto</button></td>
       </tr>
     {{/each}}
   </table>
