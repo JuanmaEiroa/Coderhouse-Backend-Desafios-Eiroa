@@ -36,7 +36,7 @@ class CartManager {
       let selectedProduct = await productManager.getProductById(pid);
 
       let existingProduct = selectedCart.products.find((prod) => {
-        return prod.product.toString() === selectedProduct._id.toString();
+        return prod.product._id.toString() === selectedProduct._id.toString();
       });
 
       if (existingProduct) {
