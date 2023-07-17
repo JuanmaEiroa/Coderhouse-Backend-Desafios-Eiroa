@@ -42,17 +42,17 @@
   </table>
   <br />
   <div>
-    {{#if hasPrevPage}}
+    {{#if prodList.hasPrevPage}}
       <a
-        href="{{prevLink}}&limit={{limit}}&availability={{availability}}&category={{category}}&sort={{sort}}"
+        href="{{prodList.prevLink}}&limit={{prodList.limit}}&availability={{prodList.availability}}&category={{prodList.category}}&sort={{prodList.sort}}"
       >← Anterior</a>
     {{/if}}
     &nbsp;
-    {{this.page}}
+    {{prodList.page}}
     &nbsp;
-    {{#if hasNextPage}}
+    {{#if prodList.hasNextPage}}
       <a
-        href="{{nextLink}}&limit={{limit}}&availability={{availability}}&category={{category}}&sort={{sort}}"
+        href="{{prodList.nextLink}}&limit={{prodList.limit}}&availability={{prodList.availability}}&category={{prodList.category}}&sort={{prodList.sort}}"
       >Siguiente →</a>
     {{/if}}
   </div>

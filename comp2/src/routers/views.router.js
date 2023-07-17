@@ -33,6 +33,7 @@ viewsRouter.get("/products", isAuth, async (req, res) => {
   prodList.nextLink = prodList.hasNextPage
     ? `products?page=${prodList.nextPage}`
     : "";
+    console.log(prodList);
   res.render("products", {
     title: "Listado de Productos",
     prodList,
