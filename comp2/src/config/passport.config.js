@@ -46,43 +46,14 @@ const initializePassport = () => {
       {passReqToCallback: true, usernameField: "email" },
       async (req, username, password, done) => {
         try {
-          if (username === "adminCoder@coder.com") {
-            return done(null, false);
-          } else {
-            const user = await userManager.getByEmail(username);
-            if (!user) {
-              console.log("El usuario no existe. Regístrese");
-              return done(null, false);
-            }
-            if (!comparePassword(user, password)) {
-              console.log("La contraseña no es correcta. Intente nuevamente");
-              return done(null, false);
-            }
-            return done(null, user);
-          }
-        } catch (err) {
-          console.log(`Error de servidor para el login: ${err}`);
-        }
-      }
-    )
-  );
-
-  //PRUEBAS PARA LOGIN COMO ADMIN Y ASIGNACION DE ROLES
-  /*
-  passport.use(
-    "login",
-    new LocalStrategy(
-      { passReqToCallback: true, usernameField: "email" },
-      async (req, username, password, done) => {
-        try {
           if (username === "adminCoder@coder.com" && password === "adminCod3r123") {
-            req.session.role = "Admin";
-            const user = {
+            const adminUser = {
               first_name: "Coder",
               last_name: "House",
-              email: username
+              email: username,
+              role: "Admin"
             }
-            return done(null, user);
+            return done(null, adminUser);
           } else {
             const user = await userManager.getByEmail(username);
             if (!user) {
@@ -93,7 +64,6 @@ const initializePassport = () => {
               console.log("La contraseña no es correcta. Intente nuevamente");
               return done(null, false);
             }
-            req.session.role = "User";
             return done(null, user);
           }
         } catch (err) {
@@ -102,7 +72,6 @@ const initializePassport = () => {
       }
     )
   );
-  */
 
   passport.use(
     "github",
@@ -136,14 +105,22 @@ const initializePassport = () => {
     )
   );
 
-  passport.serializeUser((user, done) => {
+passport.serializeUser((user, done) => {
+  if (user.role === "Admin") {
+    done(null, user);
+  } else {
     done(null, user._id);
-  });
+  }
+});
 
-  passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id, done) => {
+  if (typeof id === "object" && id.role === "Admin") {
+    done(null, id);
+  } else {
     let user = await userManager.getById(id);
     done(null, user);
-  });
+  }
+});
 };
 
 export default initializePassport;
