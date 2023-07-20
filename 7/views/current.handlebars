@@ -14,7 +14,21 @@
     <button type="submit">Cerrar sesión</button>
   </form>
 </nav>
-<h1>Mi Carrito</h1>
+<h1>Datos del Usuario</h1>
+<div class="userData">
+<h4>Nombre: </h4>{{user.first_name}}
+<br />
+<h4>Apellido: </h4> {{user.last_name}}
+<br />
+<h4>E-mail: </h4> {{user.email}}
+<br />
+<h4>Edad: </h4> {{user.age}}
+<br />
+<h4>Foto de Perfil: </h4> 
+<br />
+{{user.img}}
+</div>
+<h2>Mi Carrito</h2>
 <br />
 <div class="tableContainer">
   <table class="productTable">

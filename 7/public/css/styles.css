@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  margin:0;
+  margin: 0;
 }
 
 html {
@@ -11,10 +11,15 @@ body {
   background-color: antiquewhite;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
   font-family: Verdana, sans-serif;
   text-decoration: underline;
+}
+
+h4 {
+  display: inline;
 }
 
 .tableContainer {
@@ -144,7 +149,7 @@ td {
 }
 
 #navbar p {
-  margin:0;
+  margin: 0;
 }
 
 #navbar button {
@@ -161,4 +166,14 @@ td {
 
 .navBtn {
   background-color: darkolivegreen !important;
+}
+
+.userData {
+  margin-inline: auto;
+  margin-block: 20px;
+  padding-block: 20px;
+  border: #183b3a solid 2px;
+  background-color: aliceblue;
+  width: 15%;
+  text-align: center;
 }
