@@ -4,6 +4,18 @@ import {
   ticketService,
   userService,
 } from "../repositories/repoIndex.js";
+import nodemailer from "nodemailer";
+import { appConfig } from "../config/env.config.js";
+
+//Definición de constante transport para envío de mail con ticket
+const transport = nodemailer.createTransport({
+  service: "gmail",
+  port: 587,
+  auth: {
+    user: appConfig.gmailUser,
+    pass: appConfig.gmailAppPass,
+  },
+});
 
 class PurchaseController {
   async endPurchase(cid, user) {
@@ -44,10 +56,42 @@ class PurchaseController {
       //Obtención del usuario actual
       const purchaseUser = await userService.getById(user._id);
 
-      //Generación del ticket de compra
+      //GENERACIÓN DE TICKET DE COMPRA
+      //Generación de código aleatorio
+      function codeGenerator() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let code = "";
+
+        for (let i = 0; i < 10; i++) {
+          const randIndex = Math.floor(Math.random() * chars.length);
+          code += chars.charAt(randIndex);
+        }
+
+        return code;
+      }
+
+      let ticketCode = codeGenerator();
+
+      //Armado del ticket
       await ticketService.add({
         amount: finalPrice,
         purchaser: purchaseUser.email,
+        code: ticketCode,
+      });
+
+      //GENERACIÓN DE MAIL PARA ENVÍO DE TICKET
+      let mail = await transport.sendMail({
+        from: `CoderCommerce ${appConfig.gmailUser}`,
+        to: purchaseUser.email,
+        subject: "Compra Exitosa!",
+        html: `
+              <div>
+              <h1>Compra finalizada exitosamente!</h1>
+              <p>Su compra ha sido realizada correctamente. Para poder seguir el estado de la misma, use el siguiente código:</p>
+              <h3>${ticketCode}</h3>
+              </div>
+        `,
+        attachments: [],
       });
     } catch (error) {
       console.error("Error durante la compra:", error);

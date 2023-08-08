@@ -19,4 +19,6 @@ export const appConfig = {
   adminPassword: process.env.ADMIN_PASSWORD,
   githubClient: process.env.GITHUB_CLIENT,
   githubSecret: process.env.GITHUB_SECRET,
+  gmailUser: process.env.GMAIL_USER,
+  gmailAppPass: process.env.GMAIL_APP_PASS,
 };

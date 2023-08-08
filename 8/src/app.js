@@ -1,3 +1,9 @@
+import express from "express";
+import handlebars from "express-handlebars";
+import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
+import productRouter from "./routers/products.router.js";
+import cartRouter from "./routers/carts.router.js";
 import messageRouter from "./routers/messages.router.js";
 import userRouter from "./routers/users.router.js";
 import viewsRouter from "./routers/views.router.js";
@@ -45,7 +51,7 @@ app.use("/api/tickets", ticketRouter);
 app.use("/mockingproducts", mockRouter);
 app.use("/", viewsRouter);
 
-app.use(errorMiddleware)
+app.use(errorMiddleware);
 
 io.on("connection", async (socket) => {
   socket.on("message", async (data) => {
