@@ -2,6 +2,9 @@ import { Router } from "express";
 import { io } from "../utils/server.util.js";
 import productController from "../controllers/product.controller.js"
 import { isAdmin } from "../middlewares/auth.middleware.js";
+import CustomErrors from "../utils/errors/CustomErrors.js";
+import { generateProdErrorInfo } from "../utils/errors/errorInfo.js";
+import ErrorIndex from "../utils/errors/ErrorIndex.js";
 
 const productRouter = Router();
 
@@ -23,10 +26,11 @@ productRouter.get("/:pid", async (req, res) => {
 
 productRouter.post("/", isAdmin, async (req, res) => {
   try {
-    res.status(201).send(await productController.add(req.body));
+    const product = req.body
+    res.status(201).send(await productController.add(product));
     io.emit("newProd", req.body);
   } catch (err) {
-    res.status(400).send(err);
+    CustomErrors.createError("Product creation error", generateProdErrorInfo(product), "Campos incompletos", ErrorIndex.INCOMPLETE_DATA)
   }
 });
 
