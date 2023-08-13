@@ -39,7 +39,7 @@ export default class CartsManager {
         }
       });
       prodCart.id = await this.#getNewId(); //Función para generar el id automáticamente
-      cartList.push(prodCart);  //Añadido del carrito al array
+      cartList.push(prodCart); //Añadido del carrito al array
       await fs.promises.writeFile(this.path, JSON.stringify(cartList));
     } catch (err) {
       console.log(`Error al agregar el carrito: ${err}`);
@@ -112,9 +112,7 @@ export default class CartsManager {
   //Método para eliminar un carrito usando id
   async deleteCart(id) {
     try {
-      let cartList = JSON.parse(
-        await fs.promises.readFile(this.path, "utf-8")
-      );
+      let cartList = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
       cartList = await cartList.filter((cart) => {
         return cart.id !== id;
       });

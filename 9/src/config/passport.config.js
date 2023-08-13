@@ -22,7 +22,7 @@ const initializePassport = () => {
           //Se obtiene el usuario por email. Si es igual a las credenciales del admin, se rechaza el registro
           let user = await userController.getByEmail(username);
           if (user || username === appConfig.adminName) {
-            console.log("El usuario ya existe");
+            req.logger.warning("El usuario ya existe");
             return done(null, false);
           }
           //Se encripta la contraseña y se genera el nuevo usuario
@@ -72,17 +72,17 @@ const initializePassport = () => {
             const user = await userController.getByEmail(username);
             if (!user) {
               //Si no existe, se solicita registro. Si la contraseña no es correcta con la almacenada, se solicita intentar nuevamente.
-              console.log("El usuario no existe. Regístrese");
+              req.logger.error("El usuario no existe. Regístrese");
               return done(null, false);
             }
             if (!comparePassword(user, password)) {
-              console.log("La contraseña no es correcta. Intente nuevamente");
+              req.logger.error("La contraseña no es correcta. Intente nuevamente")
               return done(null, false);
             }
             return done(null, user);
           }
         } catch (err) {
-          console.log(`Error de servidor para el login: ${err}`);
+          req.logger.fatal(`Error de servidor para el login: ${err}`);
         }
       }
     )

@@ -12,6 +12,7 @@ productRouter.get("/", async (req, res) => {
   try {
     res.status(200).send(await productController.get());
   } catch (err) {
+    req.logger.error(`Error al obtener los productos: ${err}`)
     res.status(400).send(err);
   }
 });
@@ -20,6 +21,7 @@ productRouter.get("/:pid", async (req, res) => {
   try {
     res.status(200).send(await productController.getById(req.params.pid));
   } catch (err) {
+    req.logger.error(`Error al obtener el producto por ID: ${err}`)
     res.status(400).send(err);
   }
 });
@@ -40,6 +42,7 @@ productRouter.put("/:pid", isAdmin, async (req, res) => {
       .status(201)
       .send(await productController.update(req.params.pid, req.body));
   } catch (err) {
+    req.logger.error(`Error al actualizar el producto por ID: ${err}`)
     res.status(400).send(err);
   }
 });
@@ -49,6 +52,7 @@ productRouter.delete("/:pid", isAdmin, async (req, res) => {
     res.status(200).send(await productController.delete(req.params.pid));
     io.emit("deletedProd", req.params.pid);
   } catch (err) {
+    req.logger.error(`Error al eliminar el producto por ID: ${err}`)
     res.status(400).send(err);
   }
 });
