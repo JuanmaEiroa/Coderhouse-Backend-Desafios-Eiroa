@@ -60,7 +60,6 @@ export default class CartsManager {
   async getCartById(id) {
     try {
       let cartList = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-
       return cartList.find((cart) => {
         return cart.id === id;
       });
