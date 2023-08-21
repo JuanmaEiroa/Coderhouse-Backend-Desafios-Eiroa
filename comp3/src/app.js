@@ -6,6 +6,7 @@ import handlebars from "express-handlebars";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import { app, io } from "./utils/server.util.js";
+import cors from "cors";
 
 //Routers
 import productRouter from "./routers/products.router.js";
@@ -35,6 +36,7 @@ import { addEnvLogger } from "./middlewares/logger.middleware.js";
 //Configuración de servidor
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 //Configuración de handlebars
 app.engine("handlebars", handlebars.engine());

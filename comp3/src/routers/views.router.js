@@ -105,7 +105,7 @@ viewsRouter.get("/passrecover", isGuest, async(req,res)=>{
   })
 })
 
-viewsRouter.get("/newpass/:email", isGuest, async(req,res)=>{
+viewsRouter.get("/newpass", isGuest, async(req,res)=>{
   res.render("passrecoverend", {
     title: "Restablecer contraseña"
   })

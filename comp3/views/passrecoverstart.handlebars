@@ -1,22 +1,21 @@
 <h1>Restablecer contraseña</h1>
 <section id="recovForm">
   <div>
-    <form>
-      <p class="recovDescription">Ingrese a continuación su correo electrónico.
-        Se le enviará un mail con un link para el restablecimiento de su contraseña.
-        <br />
-        Tenga en cuenta que el link tendrá validez por una hora.</p>
-      <input
-        type="email"
-        class="recovInput"
-        placeholder="Ingrese su email"
-        name="email"
-        class="formInput"
-        id="email"
-      />
+    <p class="recovDescription">Ingrese a continuación su correo electrónico. Se
+      le enviará un mail con un link para el restablecimiento de su contraseña.
       <br />
-      <button class="formBtn" onclick="sendMail()">Enviar correo de recuperación</button>
-    </form>
+      Tenga en cuenta que el link tendrá validez por una hora.</p>
+    <input
+      type="email"
+      class="recovInput"
+      placeholder="Ingrese su email"
+      name="email"
+      class="formInput"
+      id="email"
+    />
+    <br />
+    <button class="formBtn" onclick="sendMail()">Enviar correo de recuperación</button>
+    <br />
     <a href="/"><button class="formBtn">Volver al inicio de sesión</button></a>
   </div>
 </section>

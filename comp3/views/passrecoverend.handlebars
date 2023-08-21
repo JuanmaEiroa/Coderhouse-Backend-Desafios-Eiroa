@@ -1,14 +1,35 @@
 <h1>Restablecer contraseña</h1>
 <section id="recovForm">
-    <div>
-        <form action="" method="">
-            <input type="password" class="recovInput" placeholder="Ingrese su nueva contraseña" name="newPassword" class="formInput">
-            <br/>
-            <input type="password" class="recovInput" placeholder="Ingrese nuevamente su nueva contraseña" name="repeatNewPassword" class="formInput">
-            <br/>
-            <br/>
-            <button class="formBtn" type="submit">Cambiar contraseña</button>
-        </form>
-        <a href="/"><button class="formBtn">Volver al inicio de sesión</button></a>
-    </div>    
+  <div>
+    <input
+      type="email"
+      class="recovInput"
+      placeholder="Ingrese su correo electrónico"
+      name="email"
+      id="email"
+    />
+    <br />
+    <input
+      type="password"
+      class="recovInput"
+      placeholder="Ingrese su nueva contraseña"
+      name="newPassword"
+      id="newPassword"
+    />
+    <br />
+    <input
+      type="password"
+      class="recovInput"
+      placeholder="Ingrese nuevamente su nueva contraseña"
+      name="repeatNewPassword"
+      id="repeatNewPassword"
+    />
+    <br />
+    <br />
+    <button class="formBtn" onclick="recoverPass()">Cambiar contraseña</button>
+    <br />
+    <a href="/"><button class="formBtn">Volver al inicio de sesión</button></a>
+  </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/recov.js"></script>

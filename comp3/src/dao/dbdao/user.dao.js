@@ -20,4 +20,8 @@ export default class UserMongoDAO {
   async add(userData) {
     return await this.collection.create(userData);
   }
+
+  async update(uid, user) {
+    return await this.collection.findByIdAndUpdate(uid, user);
+  }
 }
