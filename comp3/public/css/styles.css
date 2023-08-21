@@ -1,0 +1,230 @@
+/* INICIO CSS GENERAL */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  padding: 0;
+}
+
+body {
+  background-color: antiquewhite;
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  text-decoration: underline;
+}
+
+h4 {
+  display: inline;
+}
+
+/* INICIO CSS PRODUCTOS */
+
+.tableContainer {
+  margin: auto;
+  width: 80%;
+}
+
+.productTable {
+  border: 2px black solid;
+  text-align: center;
+  background-color: aliceblue;
+}
+
+th {
+  border-bottom: solid 1.5px black;
+}
+
+tr {
+  border-bottom: 2px black dashed;
+}
+
+td {
+  padding-inline: 10px;
+  border-bottom: dashed black 1px;
+}
+
+/* INICIO CSS CHAT */
+
+#chatTitle {
+  text-align: center;
+  font-family: monospace;
+  font-size: 2.5rem;
+}
+
+.chatContainer {
+  background-color: rgb(215, 230, 250);
+  margin-inline: auto;
+  width: 60%;
+}
+
+.messageLogsCont {
+  border: dashed 3px gray;
+}
+
+.chatBoxCont {
+  display: flex;
+  padding: 5px;
+  justify-content: space-around;
+}
+
+#chatBox {
+  width: 90%;
+  height: 50px;
+  background-color: rgb(190, 240, 253);
+}
+
+#sendBtn {
+  width: 100px;
+  background-color: lightblue;
+  font-size: 1.2em;
+  font-family: "Calibri", sans-serif;
+  font-weight: 800;
+}
+
+/* INICIO CSS LOGIN Y REGISTER */
+
+#loginForm {
+  text-align: center;
+  border: 3px dotted gray;
+  width: 250px;
+  margin: 50px auto;
+  height: 350px;
+  padding-top: 25px;
+}
+
+.formInput {
+  background-color: blanchedalmond;
+  height: 40px;
+}
+
+.formInput:not(:last-child), .recovInput:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.formBtn {
+  background-color: chocolate;
+  border-radius: 15%;
+  box-sizing: 200px 200px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.divider {
+  width: 80%;
+  margin: 10px auto 0;
+  height: 3px;
+  background-color: gray;
+  border: none;
+}
+
+.githubBtn {
+  background-color: #333;
+  color: white;
+  border-radius: 15%;
+  box-sizing: 200px 200px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+#registerForm {
+  text-align: center;
+  border: 3px dotted gray;
+  width: 500px;
+  margin: auto;
+  height: 420px;
+  padding-top: 25px;
+}
+
+#registerForm input {
+  width: 400px;
+}
+
+/* INICIO CSS NAVBAR */
+
+#navbar {
+  background-color: #178582;
+  color: whitesmoke;
+  text-align: right;
+  padding-right: 20px;
+  height: 120px;
+  margin-bottom: 10px;
+  border-bottom: 5px solid #183b3a;
+}
+
+#navbar p {
+  margin: 0;
+}
+
+#navbar button {
+  background-color: red;
+  color: whitesmoke;
+  border: none;
+  height: 1.5em;
+  box-shadow: 1px 3px 3px black;
+}
+
+#navbar button:hover {
+  cursor: pointer;
+}
+
+.navBtn {
+  background-color: darkolivegreen !important;
+}
+
+.userData {
+  margin-inline: auto;
+  margin-block: 20px;
+  padding-block: 20px;
+  border: #183b3a solid 2px;
+  background-color: aliceblue;
+  width: 15%;
+  text-align: center;
+}
+
+/* INICIO CSS PURCHASE */
+
+.endPurchCont {
+  text-align: center;
+}
+
+.endPurchBtn {
+  background-color: green;
+  color: whitesmoke;
+  font-size: 1.2em;
+  border: none;
+  height: 3em;
+  box-shadow: 1px 3px 3px black;
+  width: 200px;
+}
+
+.endPurchBtn:hover {
+  cursor:pointer;
+}
+
+/* INICIO CSS PASS RECOVERY */
+
+#recovForm {
+  text-align: center;
+  border: 3px dotted gray;
+  width: 500px;
+  margin: 50px auto;
+  height: 270px;
+  padding-top: 25px;
+}
+
+.recovDescription {
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.recovInput {
+  background-color: blanchedalmond;
+  height: 40px;
+  width: 300px;
+}
