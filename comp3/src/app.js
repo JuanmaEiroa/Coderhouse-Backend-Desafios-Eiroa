@@ -16,6 +16,7 @@ import viewsRouter from "./routers/views.router.js";
 import ticketRouter from "./routers/tickets.router.js";
 import mockRouter from "./routers/mock.router.js";
 import loggerRouter from "./routers/logger.router.js";
+import passRouter from "./routers/pass.router.js";
 
 //Login, Cookies y Session
 import session from "express-session";
@@ -76,6 +77,7 @@ app.use("/api/users", userRouter);
 app.use("/api/tickets", ticketRouter);
 app.use("/mockingproducts", mockRouter);
 app.use("/loggertest", loggerRouter);
+app.use("/api/passrecov", passRouter)
 app.use("/", viewsRouter);
 
 //Configuración de Middlewares
