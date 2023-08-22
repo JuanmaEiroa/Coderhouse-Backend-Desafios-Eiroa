@@ -26,6 +26,17 @@ export function isAdmin(req, res, next) {
   }
 }
 
+export function isPremium(req, res, next) {
+  const { user } = req.session;
+  if (user && user.role === "Premium") {
+    next();
+  } else {
+    res
+    .status(403)
+    .json({ message: "Acceso no permitido. Se requiere ser Premium" });
+  }
+}
+
 export function isUser(req, res, next) {
   const { user } = req.session;
   if (user && user.role === "User") {

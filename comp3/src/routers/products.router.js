@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { io } from "../utils/server.util.js";
 import productController from "../controllers/product.controller.js"
-import { isAdmin } from "../middlewares/auth.middleware.js";
+import { isAdmin, isPremium } from "../middlewares/auth.middleware.js";
 import CustomErrors from "../utils/errors/CustomErrors.js";
 import { generateProdErrorInfo } from "../utils/errors/errorInfo.js";
 import ErrorIndex from "../utils/errors/ErrorIndex.js";
@@ -26,7 +26,7 @@ productRouter.get("/:pid", async (req, res) => {
   }
 });
 
-productRouter.post("/", isAdmin, async (req, res) => {
+productRouter.post("/", isPremium, isAdmin, async (req, res) => {
   try {
     const product = req.body
     res.status(201).send(await productController.add(product));
