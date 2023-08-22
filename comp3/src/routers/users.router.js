@@ -1,5 +1,6 @@
 import { Router } from "express";
-import passport from "passport"; 
+import passport from "passport";
+import userController from "../controllers/user.controller.js";
 
 const userRouter = Router();
 
@@ -46,13 +47,23 @@ userRouter.get(
   }
 );
 
-userRouter.get("/loginerror", (req,res)=>{
-  res.send({error: "Fallo en el inicio de sesión"})
-})
+userRouter.get("/loginerror", (req, res) => {
+  res.send({ error: "Fallo en el inicio de sesión" });
+});
 
 userRouter.post("/logout", (req, res) => {
   req.session.destroy();
   res.status(201).redirect("/");
+});
+
+userRouter.get("/premium/:uid", async (req, res) => {
+  try {
+    const user = await userController.changeRole(req.params.uid);
+    res.send({message: "Usuario cambió de rol exitosamente", payload: user});
+  } catch (err) {
+    req.logger.error(`Error al convertir en premium al usuario: ${err}`);
+    res.status(500).send(`Error al convertir en premium al usuario: ${err}`);
+  }
 });
 
 export default userRouter;

@@ -20,6 +20,17 @@ class UserController {
   async add(userData) {
     return await this.service.add(userData);
   }
+
+  async changeRole(uid) {
+    const user = await this.service.getById(uid);
+    if (user.role === "User") {
+      user.role = "Premium";
+    } else if (user.role === "Premium") {
+      user.role = "User";
+    }
+    await this.service.update(uid, user);
+    return user;
+  }
 }
 
 const userController = new UserController();
