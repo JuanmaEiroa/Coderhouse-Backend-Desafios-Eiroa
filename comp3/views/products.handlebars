@@ -8,7 +8,7 @@
     Rol:
     {{user.role}}
   </p>
-  <input type="hidden" id="cartId" value="{{user.cart}}">
+  <input type="hidden" id="cartId" value="{{user.cart}}" />
   <a href="/current"><button class="navBtn">Mi Carrito</button></a>
   <a href="/chat"><button class="navBtn">Chat</button></a>
   <form action="/api/users/logout" method="post">
@@ -20,6 +20,30 @@
 <h2>Los productos disponibles son:</h2>
 <br />
 <div class="tableContainer">
+  <div class="filterCont">
+    <form method="get">
+    <label for="category">Categoría:</label>
+    <select name="category" id="categFilter">
+      <option value="">Elija una categoría</option>
+      <option value="Playstation">Playstation</option>
+      <option value="Xbox">Xbox</option>
+      <option value="Nintendo">Nintendo</option>
+    </select>
+    <label for="limit">Productos por Página:</label>
+    <select name="limit" id="limitFilter">
+      <option value="10">10</option>
+      <option value="5" selected>5</option>
+      <option value="3">3</option>
+    </select>
+    <label for="priceSort">Ordenar por:</label>
+    <select name="sort" id="priceSortFilter">
+      <option value="">Elija un orden</option>
+      <option value="asc">Menor precio</option>
+      <option value="desc">Mayor precio</option>
+    </select>
+    <input type="submit" value="Aplicar filtros">
+    </form>
+  </div>
   <table class="productTable">
     <th>ID</th>
     <th>Nombre</th>

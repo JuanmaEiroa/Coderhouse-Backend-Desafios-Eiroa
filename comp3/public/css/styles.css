@@ -25,6 +25,11 @@ h4 {
 
 /* INICIO CSS PRODUCTOS */
 
+.filterCont {
+  margin-bottom: 10px;
+  text-align: right;
+}
+
 .tableContainer {
   margin: auto;
   width: 80%;
