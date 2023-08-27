@@ -3,7 +3,7 @@ import productController from "../controllers/product.controller.js";
 import messageController from "../controllers/message.controller.js";
 import cartController from "../controllers/cart.controller.js";
 import userController from "../controllers/user.controller.js";
-import { isAuth, isGuest, isUser} from "../middlewares/auth.middleware.js";
+import { isAuth, isGuest, isUser } from "../middlewares/auth.middleware.js";
 
 const viewsRouter = Router();
 
@@ -34,6 +34,7 @@ viewsRouter.get("/products", isAuth, async (req, res) => {
   prodList.nextLink = prodList.hasNextPage
     ? `products?page=${prodList.nextPage}`
     : "";
+
   res.render("products", {
     title: "Listado de Productos",
     prodList,
@@ -57,8 +58,8 @@ viewsRouter.get("/realtimeproducts", isAuth, async (req, res) => {
 
 viewsRouter.get("/chat", isAuth, isUser, async (req, res) => {
   const renderMessages = await messageController.get();
-  const {user} = req.session;
-  res.render("chat", { title: "CoderChat", renderMessages, user});
+  const { user } = req.session;
+  res.render("chat", { title: "CoderChat", renderMessages, user });
 });
 
 viewsRouter.get("/register", isGuest, (req, res) => {
@@ -90,25 +91,25 @@ viewsRouter.get("/current", isAuth, isUser, async (req, res) => {
   });
 });
 
-viewsRouter.get("/purchase", isAuth, async(req,res)=>{
+viewsRouter.get("/purchase", isAuth, async (req, res) => {
   const { user } = req.session;
   const userToShow = await userController.getById(user._id);
   res.render("purchase", {
-    title: "Compra Finalizada", 
-    userToShow
-  })
-})
+    title: "Compra Finalizada",
+    userToShow,
+  });
+});
 
-viewsRouter.get("/passrecover", isGuest, async(req,res)=>{
+viewsRouter.get("/passrecover", isGuest, async (req, res) => {
   res.render("passrecoverstart", {
-    title: "Recuperar contraseña"
-  })
-})
+    title: "Recuperar contraseña",
+  });
+});
 
-viewsRouter.get("/newpass", isGuest, async(req,res)=>{
+viewsRouter.get("/newpass", isGuest, async (req, res) => {
   res.render("passrecoverend", {
-    title: "Restablecer contraseña"
-  })
-})
+    title: "Restablecer contraseña",
+  });
+});
 
 export default viewsRouter;

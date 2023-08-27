@@ -6,8 +6,8 @@ class ProductController {
     this.service = productService;
   }
 
-  async get() {
-    return await this.service.get();
+  async get(limit, page, category, status, sort) {
+    return await this.service.get(limit, page, category, status, sort);
   }
 
   async getById(pid) {

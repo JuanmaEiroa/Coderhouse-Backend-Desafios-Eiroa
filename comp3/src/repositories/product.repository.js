@@ -5,8 +5,8 @@ export default class ProductRepository {
     this.dao = dao;
   }
 
-  async get() {
-    return await this.dao.get();
+  async get(limit, page, category, status, sort) {
+    return await this.dao.get(limit, page, category, status, sort);
   }
 
   async getById(id) {

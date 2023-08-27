@@ -6,7 +6,7 @@ export default class ProductMongoDAO {
   }
 
   async get(
-    limit = 10,
+    limit = 5,
     page = 1,
     category = false,
     status = false,
