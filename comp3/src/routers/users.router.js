@@ -59,7 +59,8 @@ userRouter.post("/logout", (req, res) => {
 userRouter.get("/premium/:uid", async (req, res) => {
   try {
     const user = await userController.changeRole(req.params.uid);
-    res.send({message: "Usuario cambió de rol exitosamente", payload: user});
+    req.session.user.role = user.role;
+    res.redirect("/");
   } catch (err) {
     req.logger.error(`Error al convertir en premium al usuario: ${err}`);
     res.status(500).send(`Error al convertir en premium al usuario: ${err}`);

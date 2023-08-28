@@ -35,10 +35,13 @@ viewsRouter.get("/products", isAuth, async (req, res) => {
     ? `products?page=${prodList.nextPage}`
     : "";
 
+  const isUser = user.role === "User";
+
   res.render("products", {
     title: "Listado de Productos",
     prodList,
     user,
+    isUser
   });
 });
 

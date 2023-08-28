@@ -23,7 +23,7 @@ export default class ProductRepository {
     return await this.dao.update(pid, product);
   }
 
-  async deleteProduct(pid) {
+  async delete(pid) {
     return await this.dao.delete(pid);
   }
 }

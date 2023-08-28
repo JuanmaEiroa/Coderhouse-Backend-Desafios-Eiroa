@@ -22,7 +22,7 @@ class ProductController {
     return await this.service.update(pid, product);
   }
 
-  async deleteProduct(pid) {
+  async delete(pid) {
     return await this.service.delete(pid);
   }
 }

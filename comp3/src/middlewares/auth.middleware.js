@@ -47,3 +47,12 @@ export function isUser(req, res, next) {
       .json({ message: "Acceso no permitido. Se requiere ser User" });
   }
 }
+
+export function isPremiumOrAdmin (req,res,next) {
+  const {user} = req.session;
+  if (user.role === "Premium" || user.role === "Admin") {
+    next()
+  } else {
+    res.status(403).json({message: "Acceso no permitido. Se requiere ser Premium o Admin"})
+  }
+}
