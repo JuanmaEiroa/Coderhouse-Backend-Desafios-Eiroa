@@ -23,6 +23,55 @@ h4 {
   display: inline;
 }
 
+/* INICIO CSS NAVBAR */
+
+#navbar {
+  background-color: #178582;
+  color: whitesmoke;
+  text-align: right;
+  padding-right: 20px;
+  height: 120px;
+  margin-bottom: 10px;
+  border-bottom: 5px solid #183b3a;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar p {
+  margin: 0;
+}
+
+#navbar button {
+  background-color: red;
+  color: whitesmoke;
+  border: none;
+  height: 1.5em;
+  box-shadow: 1px 3px 3px black;
+}
+
+#navbar button:hover {
+  cursor: pointer;
+}
+
+#logoImg {
+  height: 80%;
+  align-self: center;
+}
+
+.navBtn {
+  background-color: darkolivegreen !important;
+}
+
+.userData {
+  margin-inline: auto;
+  margin-block: 20px;
+  padding-block: 20px;
+  border: #183b3a solid 2px;
+  background-color: aliceblue;
+  width: 15%;
+  text-align: center;
+}
+
 /* INICIO CSS PRODUCTOS */
 
 .filterCont {
@@ -187,47 +236,6 @@ td {
   width: 400px;
 }
 
-/* INICIO CSS NAVBAR */
-
-#navbar {
-  background-color: #178582;
-  color: whitesmoke;
-  text-align: right;
-  padding-right: 20px;
-  height: 120px;
-  margin-bottom: 10px;
-  border-bottom: 5px solid #183b3a;
-}
-
-#navbar p {
-  margin: 0;
-}
-
-#navbar button {
-  background-color: red;
-  color: whitesmoke;
-  border: none;
-  height: 1.5em;
-  box-shadow: 1px 3px 3px black;
-}
-
-#navbar button:hover {
-  cursor: pointer;
-}
-
-.navBtn {
-  background-color: darkolivegreen !important;
-}
-
-.userData {
-  margin-inline: auto;
-  margin-block: 20px;
-  padding-block: 20px;
-  border: #183b3a solid 2px;
-  background-color: aliceblue;
-  width: 15%;
-  text-align: center;
-}
 
 /* INICIO CSS PURCHASE */
 

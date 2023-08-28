@@ -1,4 +1,6 @@
 <nav id="navbar">
+  <img id="logoImg" src="/assets/logo.png" />
+  <div class="navBarInfo">
   <p>Bienvenido,
     {{user.first_name}}
     {{user.last_name}}
@@ -15,6 +17,7 @@
   <form action="/api/users/logout" method="post">
     <button type="submit">Cerrar sesión</button>
   </form>
+  </div>
 </nav>
 <h1>Listado de Productos</h1>
 <br />
@@ -114,7 +117,7 @@
           type="text"
           placeholder="Inserte URL de la imagen"
         />
-        <input type="submit" />
+        <input type="submit" value="Agregar Producto"/>
       </form>
     </div>
     <hr />
@@ -191,7 +194,7 @@
         type="text"
         placeholder="Inserte el ID del producto"
       />
-      <button onclick="deleteProd()">Eliminar</button>
+      <button onclick="deleteProd()">Eliminar Producto</button>
     </div>
   </div>
 {{/unless}}
