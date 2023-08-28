@@ -88,7 +88,7 @@
     <h2>Panel de Productos</h2>
     <div class="prodManagCont">
       <h4>Agregar un producto</h4>
-      <form method="post" action="/api/products">
+      <form class="addProdForm" method="post" action="/api/products">
         <label for="title">Nombre del producto:</label>
         <input
           name="title"
@@ -117,6 +117,7 @@
         <input type="submit" />
       </form>
     </div>
+    <hr />
     <div class="prodManagCont">
       <h4>Actualizar un producto</h4>
       <br />
@@ -179,6 +180,7 @@
       />
       <button onclick="updateProd()">Actualizar Producto</button>
     </div>
+    <hr/>
     <div class="prodManagCont">
       <h4>Eliminar un producto</h4>
       <br />

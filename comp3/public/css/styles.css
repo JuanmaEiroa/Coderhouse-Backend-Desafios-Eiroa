@@ -54,6 +54,43 @@ td {
   border-bottom: dashed black 1px;
 }
 
+/* INICIO CSS PANEL PRODUCTOS */
+.prodManagerPanel{
+  border: 2px black solid;
+  text-align: center;
+  background-color: aliceblue;
+  width: 40%;
+  margin: 10px auto;
+
+}
+
+.prodManagerPanel h2{
+  margin-block: 10px;
+}
+
+.prodManagCont label {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.addProdForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.prodManagCont{
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.prodManagCont input,
+.prodManagCont textarea {
+  margin-bottom: 10px;
+}
+
 /* INICIO CSS CHAT */
 
 #chatTitle {
