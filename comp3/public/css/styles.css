@@ -62,15 +62,6 @@ h4 {
   background-color: darkolivegreen !important;
 }
 
-.userData {
-  margin-inline: auto;
-  margin-block: 20px;
-  padding-block: 20px;
-  border: #183b3a solid 2px;
-  background-color: aliceblue;
-  width: 15%;
-  text-align: center;
-}
 
 /* INICIO CSS PRODUCTOS */
 
@@ -110,7 +101,6 @@ td {
   background-color: aliceblue;
   width: 40%;
   margin: 10px auto;
-
 }
 
 .prodManagerPanel h2{
@@ -238,6 +228,23 @@ td {
 
 
 /* INICIO CSS PURCHASE */
+.userData {
+  margin-inline: auto;
+  margin-block: 20px;
+  padding-block: 20px;
+  border: #183b3a solid 2px;
+  background-color: aliceblue;
+  width: 300px;
+  text-align: center;
+}
+
+.emptyCartMsg {
+  background-color: aliceblue;
+  text-align: center;
+  border: 2px dashed black;
+  width: 500px;
+  margin: auto;
+}
 
 .endPurchCont {
   text-align: center;

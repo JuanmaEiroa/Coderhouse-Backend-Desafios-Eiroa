@@ -3,7 +3,12 @@ import productController from "../controllers/product.controller.js";
 import messageController from "../controllers/message.controller.js";
 import cartController from "../controllers/cart.controller.js";
 import userController from "../controllers/user.controller.js";
-import { isAuth, isGuest, isUser, isUserOrPremium } from "../middlewares/auth.middleware.js";
+import {
+  isAuth,
+  isGuest,
+  isUser,
+  isUserOrPremium,
+} from "../middlewares/auth.middleware.js";
 
 const viewsRouter = Router();
 
@@ -41,7 +46,7 @@ viewsRouter.get("/products", isAuth, async (req, res) => {
     title: "Listado de Productos",
     prodList,
     user,
-    isUser
+    isUser,
   });
 });
 
@@ -86,11 +91,13 @@ viewsRouter.get("/loginerror", (req, res) => {
 viewsRouter.get("/current", isAuth, isUserOrPremium, async (req, res) => {
   const { user } = req.session;
   const cart = await cartController.getById(user.cart);
+  const cartEmpty = cart.products.length < 1 ? true : false;
   const userToShow = await userController.getById(user._id);
   res.render("current", {
     title: "Carrito de Compras",
     userToShow,
     cart,
+    cartEmpty,
   });
 });
 
