@@ -1,7 +1,8 @@
 import { Router } from "express";
 import cartController from "../controllers/cart.controller.js";
-import { isUser } from "../middlewares/auth.middleware.js";
+import { isUserOrPremium } from "../middlewares/auth.middleware.js";
 import purchaseController from "../controllers/purchase.controller.js";
+import productController from "../controllers/product.controller.js";
 
 const cartRouter = Router();
 
@@ -50,11 +51,15 @@ cartRouter.delete("/:cid", async (req, res) => {
   }
 });
 
-cartRouter.post("/:cid/product/:pid", isUser, async (req, res) => {
+cartRouter.post("/:cid/product/:pid", isUserOrPremium, async (req, res) => {
+  const {user} = req.session;
+  const product = await productController.getById(req.params.pid)
   try {
-    res
-      .status(201)
-      .send(await cartController.addProdtoCart(req.params.cid, req.params.pid));
+    if (user.role === "User" || (user.role === "Premium" && product.owner !== user.email)){
+      res.status(201).send(await cartController.addProdtoCart(req.params.cid, req.params.pid));
+    } else {
+      res.status(403).send("No tiene permisos para agregar este producto al carrito")
+    }
   } catch (err) {
     req.logger.error(`Error al agregar el producto al carrito: ${err}`)
     res.status(400).send(err);

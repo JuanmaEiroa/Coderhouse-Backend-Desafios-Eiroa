@@ -28,7 +28,11 @@ productRouter.get("/:pid", async (req, res) => {
 
 productRouter.post("/", isPremiumOrAdmin, async (req, res) => {
   const product = req.body;
+  const {user} = req.session;
   try {
+    if (user.role === "Premium") {
+      product.owner = user.email;
+    }
     res.status(201).send(await productController.add(product));
     io.emit("newProd", product);
   } catch (err) {
@@ -54,9 +58,15 @@ productRouter.put("/:pid", isPremiumOrAdmin, async (req, res) => {
 });
 
 productRouter.delete("/:pid", isPremiumOrAdmin, async (req, res) => {
+  const {user} = req.session
+  const product = await productController.getById(req.params.pid)
   try {
-    res.status(200).send(await productController.delete(req.params.pid));
-    io.emit("deletedProd", req.params.pid);
+    if (user.role === "Admin" || (user.role === "Premium" && user.email === product.owner)) {
+      res.status(200).send(await productController.delete(req.params.pid));
+      io.emit("deletedProd", req.params.pid);
+    } else {
+      res.status(403).send("No tiene permisos para eliminar este producto")
+    }
   } catch (err) {
     req.logger.error(`Error al eliminar el producto por ID: ${err}`);
     res.status(401).send(err);
