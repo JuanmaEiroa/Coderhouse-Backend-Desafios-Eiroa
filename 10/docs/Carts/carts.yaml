@@ -44,7 +44,7 @@ paths:
             application/json:
               schema:
                 type: object
-                items:
+                properties:
                   $ref: "#/components/schemas/Cart"
         "500":
           description: Error del servidor
@@ -72,7 +72,7 @@ paths:
             application/json:
               schema:
                 type: object
-                items:
+                properties:
                   $ref: "#/components/schemas/Cart"
         "500":
           description: Error del servidor
@@ -84,7 +84,7 @@ paths:
         - in: path
           name: cid
           required: true
-          description: ID del carrito a eliminar
+          description: ID del carrito a vaciar
           schema:
             $type: String
       responses:
