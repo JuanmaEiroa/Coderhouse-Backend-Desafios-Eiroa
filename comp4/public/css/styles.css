@@ -227,8 +227,8 @@ td {
 }
 
 
-/* INICIO CSS PURCHASE */
-.userData {
+/* INICIO CSS PURCHASE / CURRENT */
+.userData, .fileUploader {
   margin-inline: auto;
   margin-block: 20px;
   padding-block: 20px;
@@ -236,6 +236,10 @@ td {
   background-color: aliceblue;
   width: 300px;
   text-align: center;
+}
+
+.fileUploader{
+  width: 600px;
 }
 
 .emptyCartMsg {

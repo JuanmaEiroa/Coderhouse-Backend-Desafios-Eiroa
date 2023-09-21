@@ -35,6 +35,17 @@
   <br />
   {{userToShow.img}}
 </div>
+<div class="fileUploader">
+  <form action="/api/users/{{userToShow.id}}/documents" method="post" enctype="multipart/form-data">
+    <label for="idFile">Identificación: </label><input type="file" name="idFile" id="idFile"/>
+    <br/>
+    <label for="idFile">Comprobante de domicilio: </label><input type="file" name="addressCompFile" id="addressCompFile"/>
+    <br/>
+    <label for="idFile">Comprobante de estado de cuenta: </label><input type="file" name="accountCompFile" id="accountCompFile"/>
+    <br/>
+    <input type="submit" />
+  </form>
+</div>
 <h2>Mi Carrito</h2>
 <br />
 {{#if cartEmpty}}

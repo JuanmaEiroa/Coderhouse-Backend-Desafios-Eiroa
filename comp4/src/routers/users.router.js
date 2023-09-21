@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import userController from "../controllers/user.controller.js";
+import { multerGenerator } from "../middlewares/multer.middleware.js";
 
 const userRouter = Router();
 
@@ -70,5 +71,27 @@ userRouter.get("/premium/:uid", async (req, res) => {
     res.status(500).send(`Error al convertir en premium al usuario: ${err}`);
   }
 });
+
+userRouter.post(
+  "/:uid/documents",
+  multerGenerator("/public/data/documents", ".pdf").fields([
+    { name: "idFile", maxCount: 1 },
+    { name: "addressCompFile", maxCount: 1 },
+    { name: "accountCompFile", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const user = await userController.getById(req.params.uid);
+      //user.documents.push(req.file.filename);
+      //await userController.update(req.params.uid, user)
+      console.log(req.file);
+      req.logger.info("Archivo subido correctamente!");
+      res.status(201).send("Archivo subido correctamente!");
+    } catch (error) {
+      req.logger.error(`Error interno al subir un documento: ${err}`);
+      res.status(500).send(`Error interno al subir un documento: ${err}`);
+    }
+  }
+);
 
 export default userRouter;
