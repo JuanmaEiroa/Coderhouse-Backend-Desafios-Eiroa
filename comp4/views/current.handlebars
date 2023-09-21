@@ -38,10 +38,13 @@
 <div class="fileUploader">
   <form action="/api/users/{{userToShow.id}}/documents" method="post" enctype="multipart/form-data">
     <label for="idFile">Identificación: </label><input type="file" name="idFile" id="idFile"/>
+    <input type="hidden" name="documentType" value="ID" />
     <br/>
     <label for="idFile">Comprobante de domicilio: </label><input type="file" name="addressCompFile" id="addressCompFile"/>
+    <input type="hidden" name="documentType" value="Address" />
     <br/>
     <label for="idFile">Comprobante de estado de cuenta: </label><input type="file" name="accountCompFile" id="accountCompFile"/>
+    <input type="hidden" name="documentType" value="Account" />
     <br/>
     <input type="submit" />
   </form>

@@ -82,11 +82,27 @@ userRouter.post(
   async (req, res) => {
     try {
       const user = await userController.getById(req.params.uid);
-      //user.documents.push(req.file.filename);
-      //await userController.update(req.params.uid, user)
-      console.log(req.file);
-      req.logger.info("Archivo subido correctamente!");
-      res.status(201).send("Archivo subido correctamente!");
+      if (req.files.idFile) {
+        user.documents.push({
+          name: "ID Document",
+          reference: req.files.idFile[0].path,
+        });
+      }
+      if (req.files.addressCompFile) {
+        user.documents.push({
+          name: "Address Document",
+          reference: req.files.addressCompFile[0].path,
+        });
+      }
+      if (req.files.accountCompFile) {
+        user.documents.push({
+          name: "Account Document",
+          reference: req.files.accountCompFile[0].path,
+        });
+      }
+      await userController.update(req.params.uid, user)
+      req.logger.info("Archivos subidos correctamente!");
+      res.status(201).send("Archivos subidos correctamente!");
     } catch (error) {
       req.logger.error(`Error interno al subir un documento: ${err}`);
       res.status(500).send(`Error interno al subir un documento: ${err}`);
