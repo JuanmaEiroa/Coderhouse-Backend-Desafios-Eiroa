@@ -21,19 +21,32 @@ class UserController {
     return await this.service.add(userData);
   }
 
-  async update(uid, user){
-    return await this.service.update(uid,user)
+  async update(uid, user) {
+    return await this.service.update(uid, user);
   }
 
   async changeRole(uid) {
     const user = await this.service.getById(uid);
+    const validatePremium = () => {
+      const userDocs = user.documents.map((doc) => doc.name);
+      const neededDocs = [
+        "ID Document",
+        "Address Document",
+        "Account Document",
+      ];
+      if (neededDocs.every((doc) => userDocs.includes(doc))) {
+        user.role = "Premium";
+      } else {
+        throw new Error("Se necesitan cargar los archivos necesarios");
+      }
+    };
     if (user.role === "User") {
-      user.role = "Premium";
+      validatePremium();
     } else if (user.role === "Premium") {
       user.role = "User";
     }
     await this.service.update(uid, user);
-    return user;
+    return user
   }
 }
 
